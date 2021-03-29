@@ -1,4 +1,4 @@
-package uz.mirsaidoff.moviedb.model
+package uz.mirsaidoff.moviedb.data.model
 
 class Genre(
     val id: Int,

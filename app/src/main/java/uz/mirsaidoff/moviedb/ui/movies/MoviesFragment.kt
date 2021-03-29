@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import uz.mirsaidoff.moviedb.MovieApp
 import uz.mirsaidoff.moviedb.databinding.FragmentMoviesBinding
 import javax.inject.Inject
@@ -28,6 +30,7 @@ class MoviesFragment : Fragment() {
     lateinit var factory: MoviesViewModel.Factory
     private val viewModel by viewModels<MoviesViewModel> { factory }
     private lateinit var binding: FragmentMoviesBinding
+    private val moviesAdapter by lazy { MoviesAdapter() }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -47,6 +50,20 @@ class MoviesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        observe()
+        initRecyclerView()
+    }
 
+    private fun initRecyclerView() {
+        binding.rvMovies.layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.rvMovies.adapter = moviesAdapter
+    }
+
+    private fun observe() {
+        with(viewModel) {
+            movies.observe(viewLifecycleOwner, { movies ->
+                moviesAdapter.submitList(movies)
+            })
+        }
     }
 }

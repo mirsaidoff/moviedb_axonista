@@ -5,14 +5,14 @@ import dagger.Provides
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import uz.mirsaidoff.moviedb.network.MovieService
+import uz.mirsaidoff.moviedb.data.network.Const.API_KEY
+import uz.mirsaidoff.moviedb.data.network.MovieService
+import uz.mirsaidoff.moviedb.data.network.Const.BASE_URL
 
 @Module
 class NetworkModule {
 
     companion object {
-        const val API_KEY = "274f828ad283bd634ef4fc1ee4af255f"
-        const val BASE_URL = "https://api.themoviedb.org"
     }
 
     @Provides
