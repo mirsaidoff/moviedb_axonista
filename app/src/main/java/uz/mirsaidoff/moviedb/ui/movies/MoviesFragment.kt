@@ -30,7 +30,7 @@ class MoviesFragment : Fragment() {
     lateinit var factory: MoviesViewModel.Factory
     private val viewModel by viewModels<MoviesViewModel> { factory }
     private lateinit var binding: FragmentMoviesBinding
-    private val moviesAdapter by lazy { MoviesAdapter() }
+    private val moviesAdapter by lazy { MoviesAdapter(::onMovieClicked) }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -65,5 +65,9 @@ class MoviesFragment : Fragment() {
                 moviesAdapter.submitList(movies)
             })
         }
+    }
+
+    private fun onMovieClicked(movieId: Int?) {
+        //todo
     }
 }

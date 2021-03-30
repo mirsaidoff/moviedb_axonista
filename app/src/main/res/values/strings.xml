@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">moviedb</string>
     <string name="top_movies">Top Movies</string>
+    <string name="user_score">User Score</string>
+    <string name="released">Released:</string>
+    <string name="overview">Overview</string>
 </resources>

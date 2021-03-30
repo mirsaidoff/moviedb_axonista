@@ -6,6 +6,10 @@ import javax.inject.Inject
 
 class MovieDetailsViewModel : ViewModel() {
 
+    fun loadDetails(movieId: Int) {
+
+    }
+
     //todo Fragment scope
     class Factory @Inject constructor() : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {

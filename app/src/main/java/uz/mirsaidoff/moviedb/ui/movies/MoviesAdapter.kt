@@ -10,7 +10,9 @@ import uz.mirsaidoff.moviedb.data.model.MovieInfo
 import uz.mirsaidoff.moviedb.data.network.Const
 import uz.mirsaidoff.moviedb.databinding.ItemMovieBinding
 
-class MoviesAdapter : PagedListAdapter<MovieInfo, MoviesAdapter.ViewHolder>(diffUtil) {
+class MoviesAdapter(
+    private val onMovieClick: (Int?) -> Unit
+) : PagedListAdapter<MovieInfo, MoviesAdapter.ViewHolder>(diffUtil) {
 
     companion object {
         val diffUtil = object : DiffUtil.ItemCallback<MovieInfo>() {
@@ -26,20 +28,23 @@ class MoviesAdapter : PagedListAdapter<MovieInfo, MoviesAdapter.ViewHolder>(diff
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ViewHolder(binding)
+        return ViewHolder(binding, onMovieClick)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
-    class ViewHolder(private val binding: ItemMovieBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(
+        private val binding: ItemMovieBinding,
+        private val onMovieClick: (Int?) -> Unit
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: MovieInfo?) {
             binding.tvMovieTitle.text = item?.title
             binding.tvMovieDate.text = item?.releaseDate
             binding.tvRate.text = item?.voteAverage.toString()
+            binding.containerImage.setOnClickListener { onMovieClick.invoke(item?.id) }
             Glide.with(binding.root)
                 .load("${Const.RES_URL_500}${item?.posterPath}")
                 .centerCrop()
