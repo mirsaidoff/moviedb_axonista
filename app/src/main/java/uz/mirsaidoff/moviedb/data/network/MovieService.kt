@@ -17,6 +17,7 @@ interface MovieService {
     @GET(Const.GET_MOVIE_DETAILS)
     suspend fun getMovieDetails(
         @Path("movie_id") movieId: Int,
-        @Query("language") language: String = "en-US"
+        @Query("language") language: String = "en-US",
+        @Query("append_to_response") append: String = "credits"
     ): MovieDetails
 }

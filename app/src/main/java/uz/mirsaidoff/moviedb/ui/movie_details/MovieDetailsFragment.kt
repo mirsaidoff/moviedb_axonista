@@ -3,10 +3,13 @@ package uz.mirsaidoff.moviedb.ui.movie_details
 import android.content.Context
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.os.Message
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.NonNull
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -37,6 +40,7 @@ class MovieDetailsFragment : Fragment() {
     lateinit var factory: MovieDetailsViewModel.Factory
     private val viewModel by viewModels<MovieDetailsViewModel> { factory }
     private lateinit var binding: FragmentMovieDetailsBinding
+    private val movieCastsAdapter by lazy { MovieCastsAdapter() }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -62,6 +66,7 @@ class MovieDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observe()
+        initRecycler()
     }
 
     private fun observe() {
@@ -71,9 +76,21 @@ class MovieDetailsFragment : Fragment() {
             })
 
             error.observe(viewLifecycleOwner, {
-                //todo show error
+                Log.e("Error loading movie details", it)
+                showError(it)
             })
         }
+    }
+
+    private fun showError(message: String) {
+        AlertDialog.Builder(requireContext())
+            .setMessage(message)
+            .setCancelable(false)
+            .setNeutralButton("OK") { d, _ ->
+                d.dismiss()
+            }
+            .create()
+            .show()
     }
 
     private fun onResult(details: MovieDetails) {
@@ -96,5 +113,11 @@ class MovieDetailsFragment : Fragment() {
         binding.tvOverview.text = details.overview
         binding.tvRating.text = details.voteAverage.toString()
         binding.tvReleased.text = details.releaseDate
+
+        movieCastsAdapter.setItems(details.credit?.casts?: listOf())
+    }
+
+    private fun initRecycler() {
+        binding.rvCasts.adapter = movieCastsAdapter
     }
 }
