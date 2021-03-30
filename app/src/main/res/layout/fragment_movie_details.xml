@@ -9,37 +9,21 @@
         android:id="@+id/iv_background"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#E52A3743"
         app:layout_constraintDimensionRatio="1.4:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_movie_title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="18dp"
-        android:textColor="@color/white"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@id/iv_background"
-        app:layout_constraintStart_toStartOf="@id/iv_background"
-        app:layout_constraintTop_toTopOf="@id/iv_background"
-        tools:text="Star Wars: The Rise of Skywalker" />
-
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/container_image"
         android:layout_width="0dp"
-        android:layout_height="135dp"
+        android:layout_height="175dp"
         android:layout_marginStart="18dp"
-        app:layout_constraintBottom_toTopOf="@id/tv_overview_title"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1.5"
-        app:layout_constraintStart_toStartOf="@id/iv_background"
-        app:layout_constraintTop_toBottomOf="@id/tv_movie_title"
-        app:layout_constraintVertical_bias="0.6">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.25">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_image"
@@ -47,96 +31,129 @@
             android:layout_height="match_parent" />
     </com.google.android.material.card.MaterialCardView>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_released_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/released"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@id/container_image"
-        app:layout_constraintTop_toBottomOf="@id/tv_movie_title" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_released"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="20dp"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@id/tv_released_title"
-        app:layout_constraintTop_toBottomOf="@id/tv_movie_title"
-        tools:text="19 Dec 2019" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_duration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@id/container_image"
-        app:layout_constraintTop_toBottomOf="@id/tv_released_title"
-        tools:text="2h 52m" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_genres"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@id/container_image"
-        app:layout_constraintTop_toBottomOf="@id/tv_duration"
-        tools:text="Action, Adventure, Science Fiction" />
-
-    <FrameLayout
-        android:id="@+id/container_rating"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/bg_rating"
-        app:layout_constraintStart_toEndOf="@id/container_image"
-        app:layout_constraintTop_toBottomOf="@id/tv_genres">
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#E52A3743"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@id/iv_background"
+        app:layout_constraintEnd_toEndOf="@id/iv_background"
+        app:layout_constraintStart_toStartOf="@id/iv_background"
+        app:layout_constraintTop_toTopOf="@id/iv_background">
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_movie_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="18dp"
+            android:textColor="@color/white"
+            android:textSize="36sp"
+            android:maxLines="2"
+            android:minLines="2"
+            android:textStyle="bold"
+            tools:text="Star Wars: The Rise of Skywalker" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="150dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_released_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/released"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_released"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                tools:text="19 Dec 2019" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_marginStart="150dp"
+            android:layout_marginTop="12dp"
             android:textColor="@color/white"
-            android:textSize="18sp"
-            tools:text="88" />
-    </FrameLayout>
+            android:textSize="14sp"
+            tools:text="2h 52m" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:text="@string/user_score"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@id/container_rating"
-        app:layout_constraintStart_toEndOf="@id/container_rating"
-        app:layout_constraintTop_toTopOf="@id/container_rating" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_genres"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="150dp"
+            android:layout_marginTop="13dp"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            tools:text="Action, Adventure, Science Fiction" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="150dp"
+            android:gravity="center_vertical"
+            android:paddingTop="12dp">
+
+            <FrameLayout
+                android:id="@+id/container_rating"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_rating"
+                app:layout_constraintBottom_toBottomOf="@id/iv_background"
+                app:layout_constraintStart_toEndOf="@id/container_image"
+                app:layout_constraintTop_toBottomOf="@+id/tv_genres">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    tools:text="88" />
+            </FrameLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@string/user_score"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@id/container_rating"
+                app:layout_constraintStart_toEndOf="@id/container_rating"
+                app:layout_constraintTop_toTopOf="@id/container_rating" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_overview_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="46dp"
+        android:layout_marginTop="20dp"
         android:text="@string/overview"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_background" />
+        app:layout_constraintTop_toBottomOf="@id/container_image" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_overview"

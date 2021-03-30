@@ -5,13 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import uz.mirsaidoff.moviedb.MovieApp
 import uz.mirsaidoff.moviedb.databinding.FragmentMoviesBinding
+import uz.mirsaidoff.moviedb.ui.Navigation
 import javax.inject.Inject
 
 class MoviesFragment : Fragment() {
@@ -31,9 +30,12 @@ class MoviesFragment : Fragment() {
     private val viewModel by viewModels<MoviesViewModel> { factory }
     private lateinit var binding: FragmentMoviesBinding
     private val moviesAdapter by lazy { MoviesAdapter(::onMovieClicked) }
+    private var navigation: Navigation? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        if (context is Navigation) navigation = context
+
         (requireActivity().application as MovieApp)
             .mainComponent
             .inject(this)
@@ -68,6 +70,6 @@ class MoviesFragment : Fragment() {
     }
 
     private fun onMovieClicked(movieId: Int?) {
-        //todo
+        navigation?.onNavigateToMovieDetails(movieId)
     }
 }

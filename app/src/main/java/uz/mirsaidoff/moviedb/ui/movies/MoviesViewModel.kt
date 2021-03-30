@@ -15,14 +15,10 @@ class MoviesViewModel(
     movieService: MovieService
 ) : ViewModel() {
 
-    val movies: LiveData<PagedList<MovieInfo>>
-
-    init {
-        movies = LivePagedListBuilder(
-            MoviesDataSourceFactory(viewModelScope, movieService),
-            20
-        ).build()
-    }
+    val movies: LiveData<PagedList<MovieInfo>> = LivePagedListBuilder(
+        MoviesDataSourceFactory(viewModelScope, movieService),
+        20
+    ).build()
 
     //todo Fragment scope
     class Factory @Inject constructor(private val movieService: MovieService) :

@@ -1,15 +1,23 @@
 package uz.mirsaidoff.moviedb.ui.movie_details
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.NonNull
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.Transformation
+import com.bumptech.glide.load.engine.Resource
 import uz.mirsaidoff.moviedb.MovieApp
+import uz.mirsaidoff.moviedb.R
+import uz.mirsaidoff.moviedb.data.model.MovieDetails
+import uz.mirsaidoff.moviedb.data.network.Const
 import uz.mirsaidoff.moviedb.databinding.FragmentMovieDetailsBinding
 import javax.inject.Inject
 
@@ -58,7 +66,35 @@ class MovieDetailsFragment : Fragment() {
 
     private fun observe() {
         viewModel.apply {
+            result.observe(viewLifecycleOwner, {
+                onResult(it)
+            })
 
+            error.observe(viewLifecycleOwner, {
+                //todo show error
+            })
         }
+    }
+
+    private fun onResult(details: MovieDetails) {
+        val glide = Glide.with(this)
+        glide.load("${Const.RES_URL_500}${details.backdropPath}")
+            .centerCrop()
+            .into(binding.ivBackground)
+        glide.load("${Const.RES_URL_500}${details.posterPath}")
+            .centerCrop()
+            .into(binding.ivImage)
+        binding.ivBackground.setBackgroundColor(
+            ContextCompat.getColor(
+                requireContext(),
+                R.color.black
+            )
+        )
+
+        binding.tvMovieTitle.text = details.title
+        binding.tvDuration.text = details.runtime.toString()
+        binding.tvOverview.text = details.overview
+        binding.tvRating.text = details.voteAverage.toString()
+        binding.tvReleased.text = details.releaseDate
     }
 }
