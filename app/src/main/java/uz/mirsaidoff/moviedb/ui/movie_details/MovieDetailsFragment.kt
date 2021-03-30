@@ -19,9 +19,11 @@ import com.bumptech.glide.load.Transformation
 import com.bumptech.glide.load.engine.Resource
 import uz.mirsaidoff.moviedb.MovieApp
 import uz.mirsaidoff.moviedb.R
+import uz.mirsaidoff.moviedb.Utils
 import uz.mirsaidoff.moviedb.data.model.MovieDetails
 import uz.mirsaidoff.moviedb.data.network.Const
 import uz.mirsaidoff.moviedb.databinding.FragmentMovieDetailsBinding
+import java.lang.StringBuilder
 import javax.inject.Inject
 
 class MovieDetailsFragment : Fragment() {
@@ -109,12 +111,20 @@ class MovieDetailsFragment : Fragment() {
         )
 
         binding.tvMovieTitle.text = details.title
-        binding.tvDuration.text = details.runtime.toString()
+        binding.tvDuration.text = details.runtime?.let { Utils.calculateDuration(it) }
         binding.tvOverview.text = details.overview
         binding.tvRating.text = details.voteAverage.toString()
         binding.tvReleased.text = details.releaseDate
+        binding.tvGenres.text = details.genres?.let { list ->
+            val sb = StringBuilder("")
+            list.forEachIndexed { index, genre ->
+                sb.append(genre.name)
+                if (index != list.size - 1) sb.append(", ")
+            }
+            sb
+        }.toString()
 
-        movieCastsAdapter.setItems(details.credit?.casts?: listOf())
+        movieCastsAdapter.setItems(details.credit?.casts ?: listOf())
     }
 
     private fun initRecycler() {

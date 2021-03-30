@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import uz.mirsaidoff.moviedb.R
 import uz.mirsaidoff.moviedb.data.model.Cast
 import uz.mirsaidoff.moviedb.data.network.Const
 import uz.mirsaidoff.moviedb.databinding.ItemCastBinding
@@ -38,6 +39,7 @@ class MovieCastsAdapter(
             Glide.with(binding.root)
                 .load(Const.RES_URL_500 + cast.profilePath)
                 .centerCrop()
+                .placeholder(R.drawable.placeholder)
                 .into(binding.ivProfileImage)
         }
     }

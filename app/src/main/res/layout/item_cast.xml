@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:clickable="true">
+    android:layout_height="wrap_content">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="0dp"
         android:layout_height="190dp"
         android:layout_margin="6dp"
         app:cardCornerRadius="6dp"
+        android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,6 +25,8 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_profile_image"
                 android:layout_width="match_parent"
+                android:src="@drawable/placeholder"
+                android:scaleType="centerCrop"
                 android:layout_height="138dp" />
 
             <androidx.appcompat.widget.AppCompatTextView
